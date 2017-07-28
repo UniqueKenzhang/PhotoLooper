@@ -16,17 +16,17 @@ import java.util.ArrayList;
  * Created by kenzhang on 2016/12/24.
  */
 
-public class PhotoPagerAdapter extends RecyclerView.Adapter<PhotoPagerAdapter.ItemViewHolder> {
+public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ItemViewHolder> {
 
     private ArrayList<String> data;
     private OnItemClickListener l;
 
-    public PhotoPagerAdapter(ArrayList<String> data) {
+    public PhotoAdapter(ArrayList<String> data) {
         this.data = data;
     }
 
     @Override
-    public PhotoPagerAdapter.ItemViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
+    public PhotoAdapter.ItemViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
         View inflate = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_photo_pager, viewGroup, false);
         if (l != null) {
             inflate.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +44,7 @@ public class PhotoPagerAdapter extends RecyclerView.Adapter<PhotoPagerAdapter.It
     }
 
     @Override
-    public void onBindViewHolder(final PhotoPagerAdapter.ItemViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final PhotoAdapter.ItemViewHolder viewHolder, int i) {
         viewHolder.itemView.setTag(i + 1);
         int rgb = Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
         viewHolder.img.setColorFilter(rgb);

@@ -14,7 +14,7 @@ public class PhotoItemTouchListener implements RecyclerView.OnItemTouchListener 
 
 
     private ViewDragHelper mDragHelper;
-    private PhotoRecyclerView mRecyclerView;
+    private PhotoLooperView mRecyclerView;
     private int initCenterViewX;
     private int initCenterViewY;
     private OnSwipListener onSwipListener;
@@ -23,7 +23,7 @@ public class PhotoItemTouchListener implements RecyclerView.OnItemTouchListener 
     private int curp;
 
 
-    public void attachToRecyclerView(PhotoRecyclerView recyclerView) {
+    public void attachToRecyclerView(PhotoLooperView recyclerView) {
         this.mRecyclerView = recyclerView;
         mDragHelper = ViewDragHelper.create(recyclerView, 10f, new DragHelperCallback());
         initCenterViewX = recyclerView.getLeft();

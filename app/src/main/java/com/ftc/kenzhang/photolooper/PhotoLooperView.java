@@ -12,7 +12,7 @@ import android.util.TypedValue;
  * Created by kenzhang on 2017/1/5.
  */
 
-public class PhotoRecyclerView extends RecyclerView {
+public class PhotoLooperView extends RecyclerView {
 
 
     private ViewDragHelper helper;
@@ -20,18 +20,18 @@ public class PhotoRecyclerView extends RecyclerView {
     private PhotoLayoutManager mPhotoLayoutManager;
     private float threshold = 0.6f;
 
-    public PhotoRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public PhotoLooperView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
 
-    public PhotoRecyclerView(Context context, @Nullable AttributeSet attrs) {
+    public PhotoLooperView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public PhotoRecyclerView(Context context) {
+    public PhotoLooperView(Context context) {
         super(context);
         init();
     }
@@ -42,13 +42,6 @@ public class PhotoRecyclerView extends RecyclerView {
         mPhotoItemTouchListener = new PhotoItemTouchListener();
         mPhotoItemTouchListener.attachToRecyclerView(this);
     }
-
-    public void initConfig(Context context) {
-        mPhotoLayoutManager.MAX_SHOW_COUNT = 4;
-        mPhotoLayoutManager.SCALE_GAP = 0.02f;
-        mPhotoLayoutManager.TRANS_Y_GAP = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6.5f, context.getResources().getDisplayMetrics());
-    }
-
 
     @Override
     public void setAdapter(Adapter adapter) {
@@ -89,8 +82,20 @@ public class PhotoRecyclerView extends RecyclerView {
         return mPhotoLayoutManager.SCALE_GAP;
     }
 
+    public void setShowCount(int count){
+        mPhotoLayoutManager.MAX_SHOW_COUNT=count;
+    }
+
+    public void setTransYGAP(int gap){
+        mPhotoLayoutManager.TRANS_Y_GAP=gap;
+    }
+
+    public void setScaleGap(float scale){
+        mPhotoLayoutManager.SCALE_GAP = scale;
+
+    }
     /**
-     * Threshold for recycle ;
+     *
      *
      * @param threshold 0-1
      */

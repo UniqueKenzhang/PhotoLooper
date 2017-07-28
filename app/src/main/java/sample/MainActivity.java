@@ -4,28 +4,33 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.example.kenzhang.photorecycler.R;
-import com.ftc.kenzhang.photolooper.PhotoPagerAdapter;
-import com.ftc.kenzhang.photolooper.PhotoRecyclerView;
+import com.ftc.kenzhang.photolooper.PhotoAdapter;
+import com.ftc.kenzhang.photolooper.PhotoLooperView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-    private PhotoPagerAdapter mPhotoPagerAdapter;
-    private PhotoRecyclerView mPhotoPager;
-    private ArrayList<String> mData;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mData = new ArrayList<>();
+
+
+        ArrayList<String> data = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
-            mData.add("");
+            data.add("");
         }
 
-        mPhotoPagerAdapter = new PhotoPagerAdapter(mData);
-        mPhotoPager = (PhotoRecyclerView) findViewById(R.id.content);
-        mPhotoPager.setAdapter(mPhotoPagerAdapter);// set a RecyclerView.Adapter
+        PhotoAdapter adapter = new PhotoAdapter(data);
+        PhotoLooperView looper = (PhotoLooperView) findViewById(R.id.content);
+        looper.setAdapter(adapter);// set a RecyclerView.Adapter
+
+
+        //call these method before you call setAdapter
+        looper.setThreshold(0.6f);//Persent of width.When over the threshold , the drag view will be recycled.
+        looper.setScaleGap(0.03f);//Scale rate between each item
+        looper.setTransYGAP(40);//TransY betweem each item.
+        looper.setShowCount(4);//display view count
     }
 }
