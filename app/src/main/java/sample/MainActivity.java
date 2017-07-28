@@ -24,6 +24,6 @@ public class MainActivity extends Activity {
 
         PhotoAdapter adapter = new PhotoAdapter(data);
         PhotoLooperView looper = (PhotoLooperView) findViewById(R.id.content);
-        looper.setAdapter(adapter);// set a RecyclerView.Adapter 
+        looper.setAdapter(adapter);// set a RecyclerView.Adapter
     }
 }
