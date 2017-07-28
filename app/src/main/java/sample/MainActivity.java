@@ -24,13 +24,6 @@ public class MainActivity extends Activity {
 
         PhotoAdapter adapter = new PhotoAdapter(data);
         PhotoLooperView looper = (PhotoLooperView) findViewById(R.id.content);
-        looper.setAdapter(adapter);// set a RecyclerView.Adapter
-
-
-        //call these method before you call setAdapter
-        looper.setThreshold(0.6f);//Persent of width.When over the threshold , the drag view will be recycled.
-        looper.setScaleGap(0.03f);//Scale rate between each item
-        looper.setTransYGAP(40);//TransY betweem each item.
-        looper.setShowCount(4);//display view count
+        looper.setAdapter(adapter);// set a RecyclerView.Adapter 
     }
 }
