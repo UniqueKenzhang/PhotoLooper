@@ -26,6 +26,6 @@ public class MainActivity extends Activity {
 
         mPhotoPagerAdapter = new PhotoPagerAdapter(mData);
         mPhotoPager = (PhotoRecyclerView) findViewById(R.id.content);
-        mPhotoPager.setAdapter(mPhotoPagerAdapter);
+        mPhotoPager.setAdapter(mPhotoPagerAdapter);// set a RecyclerView.Adapter
     }
 }
