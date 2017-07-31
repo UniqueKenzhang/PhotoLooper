@@ -37,6 +37,16 @@ looper.setThreshold(0.6f);//Persent of width.When over the threshold , the drag 
 looper.setScaleGap(0.03f);//Scale rate between each item
 looper.setTransYGAP(40);//TransY betweem each item.
 looper.setShowCount(4);//display view count
+
+//call when one view swip out.
+looper.setOnSwipListener(new PhotoItemTouchListener.OnSwipListener() {
+            @Override
+            public void onSwip(View itemView) {
+                //itemView is the view you just swiped out
+               looper.getCurrentPosition();//get current position
+               //TODO your job
+            }
+ });
 ```
 <br>
 <br>
