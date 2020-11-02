@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 
 
         ArrayList<String> data = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 12; i++) {
             data.add("");
         }
 

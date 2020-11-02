@@ -1,8 +1,11 @@
 package com.ftc.kenzhang.photolooper;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 /**
  * Created by kenzhang on 2017/1/6.
@@ -13,6 +16,7 @@ public class PhotoLayoutManager extends RecyclerView.LayoutManager {
     public int TRANS_Y_GAP = 40;
     public int MAX_SHOW_COUNT = 5;
     public float SCALE_GAP = 0.03f;
+    private final ArrayList<View> temp = new ArrayList<>();
 
     @Override
     public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -28,8 +32,14 @@ public class PhotoLayoutManager extends RecyclerView.LayoutManager {
         }
 
         for (int position = MAX_SHOW_COUNT; position >= 0; position--) {
-            View view = recycler.getViewForPosition(position);
-            addView(view);
+            View view = null;
+            try {
+                view = recycler.getViewForPosition(position);
+            } catch (Exception e) {
+                continue;
+            }
+
+            temp.add(view);
             measureChildWithMargins(view, 0, 0);
             int widthSpace = getWidth() - getDecoratedMeasuredWidth(view);
             int heightSpace = getHeight() - getDecoratedMeasuredHeight(view);
@@ -49,5 +59,10 @@ public class PhotoLayoutManager extends RecyclerView.LayoutManager {
             view.setScaleX(1 - SCALE_GAP * level);
             view.setScaleY(1 - SCALE_GAP * level);
         }
+
+        for (View view : temp) {
+            addView(view);
+        }
+        temp.clear();
     }
 }

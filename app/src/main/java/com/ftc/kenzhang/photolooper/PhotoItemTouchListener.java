@@ -1,10 +1,11 @@
 package com.ftc.kenzhang.photolooper;
 
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.ViewDragHelper;
-import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.core.view.ViewCompat;
+import androidx.customview.widget.ViewDragHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by kenzhang on 2017/1/5.
@@ -61,7 +62,7 @@ public class PhotoItemTouchListener implements RecyclerView.OnItemTouchListener 
 
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-            processLinkageView(changedView, initCenterViewX - left, initCenterViewY - top);
+            processLinkageView(initCenterViewX - left, initCenterViewY - top);
         }
 
         @Override
@@ -95,13 +96,21 @@ public class PhotoItemTouchListener implements RecyclerView.OnItemTouchListener 
                     }
 
                     adapter.onBindViewHolder(mRecyclerView.getChildViewHolder(cache), position);
+
+                    mRecyclerView.removeCallbacks(showBottomTask);
+                    mRecyclerView.postDelayed(showBottomTask, 500);
                 }
                 cache = releasedChild;
 
                 if (onSwipListener != null) {
                     onSwipListener.onSwip(releasedChild);
                 }
-                adapter.notifyItemMoved(0, mRecyclerView.getShowCount());
+                int min = Math.min(mRecyclerView.getShowCount(), adapter.getItemCount() - 1);
+
+
+                adapter.notifyItemMoved(0, min);
+
+
                 curp++;
                 if (curp == itemCount) {
                     curp = 0;
@@ -124,7 +133,7 @@ public class PhotoItemTouchListener implements RecyclerView.OnItemTouchListener 
         }
     }
 
-    private void processLinkageView(View changedView, int dX, int dY) {
+    private void processLinkageView(int dX, int dY) {
         double swipValue = Math.sqrt(dX * dX + dY * dY);
         double fraction = swipValue / getThreshold();
         //边界修正 最大为1
@@ -161,7 +170,6 @@ public class PhotoItemTouchListener implements RecyclerView.OnItemTouchListener 
     }
 
 
-
     //是否可以被回收掉的阈值
     public float getThreshold() {
         return mRecyclerView.getThreshold();
@@ -170,5 +178,12 @@ public class PhotoItemTouchListener implements RecyclerView.OnItemTouchListener 
     public int getCurrentPosition() {
         return curp;
     }
+
+    Runnable showBottomTask = new Runnable() {
+        @Override
+        public void run() {
+            processLinkageView(initCenterViewX, initCenterViewY);
+        }
+    };
 
 }

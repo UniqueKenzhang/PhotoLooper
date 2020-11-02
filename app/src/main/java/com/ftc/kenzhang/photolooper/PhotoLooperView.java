@@ -1,12 +1,13 @@
 package com.ftc.kenzhang.photolooper;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.ViewDragHelper;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.customview.widget.ViewDragHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by kenzhang on 2017/1/5.
@@ -71,7 +72,7 @@ public class PhotoLooperView extends RecyclerView {
     }
 
     public int getShowCount() {
-        return mPhotoLayoutManager.MAX_SHOW_COUNT;
+        return Math.min(mPhotoLayoutManager.MAX_SHOW_COUNT, getAdapter().getItemCount());
     }
 
     public int getTransYGAP() {
@@ -82,21 +83,20 @@ public class PhotoLooperView extends RecyclerView {
         return mPhotoLayoutManager.SCALE_GAP;
     }
 
-    public void setShowCount(int count){
-        mPhotoLayoutManager.MAX_SHOW_COUNT=count;
+    public void setShowCount(int count) {
+        mPhotoLayoutManager.MAX_SHOW_COUNT = count;
     }
 
-    public void setTransYGAP(int gap){
-        mPhotoLayoutManager.TRANS_Y_GAP=gap;
+    public void setTransYGAP(int gap) {
+        mPhotoLayoutManager.TRANS_Y_GAP = gap;
     }
 
-    public void setScaleGap(float scale){
+    public void setScaleGap(float scale) {
         mPhotoLayoutManager.SCALE_GAP = scale;
 
     }
+
     /**
-     *
-     *
      * @param threshold 0-1
      */
     public void setThreshold(float threshold) {
